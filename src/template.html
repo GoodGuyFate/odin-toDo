@@ -1,11 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDo App</title>
-</head>
-<body>
-    <h1>Hello</h1>
-</body>
+  </head>
+  <body class="page-wrapper">
+    <div class="app-container">
+      <aside class="sidebar">
+        <section class="menu-section"></section>
+
+        <section class="projects-section">
+          <h3>Menu</h3>
+          <div id="project-list"></div>
+        </section>
+      </aside>
+
+      <main class="sticky-wall">
+        <h1 id="current-project-title">Sticky Wall</h1>
+        <div class="grid-container">
+          <div id="todo-grid"></div>
+        </div>
+      </main>
+    </div>
+
+    <div id="todo-modal" class="modal-overlay hidden">
+      <div class="modal-content">
+        <h2>New Sticky Note</h2>
+        <form id="todo-form">
+          <input
+            type="text"
+            id="project-name"
+            placeholder="Title"
+            maxlength="50"
+            required
+          />
+
+          <textarea
+            id="todo-notes"
+            placeholder="Description/Notes"
+            maxlength="200"
+          ></textarea>
+
+          <input
+            type="text"
+            id="first-todo"
+            placeholder="Checklist (item 1, item 2...)"
+            maxlength="150"
+          />
+
+          <div class="modal-actions">
+            <button type="button" id="close-modal">Cancel</button>
+            <button type="submit">Create Note</button>
+          </div>
+
+          <select id="todo-tag">
+            <option value="Personal">Personal</option>
+            <option value="Work">Work</option>
+            <option value="List 1">List 1</option>
+          </select>
+        </form>
+      </div>
+    </div>
+  </body>
 </html>

@@ -4,4 +4,8 @@ export class Project {
         this.todos = []
         this.uuid = crypto.randomUUID()
     }
+
+    addTodo(todo) {
+        this.todos.push(todo);
+    }
 }
