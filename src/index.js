@@ -5,7 +5,7 @@ import { ToDoObject } from "./modules/todo.js";
 import { Project } from "./modules/project.js";
 
 
-projectManager.setupDefaultProject();
+// projectManager.setupDefaultProject();
 displayController.init(); 
 displayController.renderAll();
 

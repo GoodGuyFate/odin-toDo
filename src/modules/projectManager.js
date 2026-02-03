@@ -91,15 +91,6 @@ class ProjectManager {
     }
   }
 
-  // Ensures the app is never empty by creating a default project on load
-  setupDefaultProject() {
-    if (this.projects.length === 0) {
-      const home = new Project("Home");
-      this.addProject(home);
-      this.currentProject = home;
-    }
-  }
-
   addProject(project) {
     this.projects.push(project);
   }
@@ -112,9 +103,6 @@ class ProjectManager {
       this.currentProject = this.projects[0] || null;
     }
 
-    if (this.projects.length === 0) {
-      this.setupDefaultProject();
-    }
   }
 
   getProjectById(id) {

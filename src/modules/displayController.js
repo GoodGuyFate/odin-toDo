@@ -101,7 +101,7 @@ export const displayController = {
     return card;
   },
 
-  // Populates the sidebar with system and user-defined project lists
+  // Populates the sidebar with system and user-defined project tags
   renderSidebar() {
     const sidebar = document.querySelector(".projects-section");
     if (!sidebar) return;
@@ -109,7 +109,7 @@ export const displayController = {
     sidebar.replaceChildren();
 
     const heading = document.createElement("h3");
-    heading.textContent = "Lists";
+    heading.textContent = "Tags";
     sidebar.appendChild(heading);
 
     sidebar.appendChild(
@@ -123,9 +123,9 @@ export const displayController = {
 
     const addBtn = document.createElement("div");
     addBtn.className = "sidebar-item add-list-btn";
-    addBtn.innerHTML = `<span>+</span> Add New List`;
+    addBtn.innerHTML = `<span>+</span> Add New Tag`;
     addBtn.onclick = () => {
-      const name = prompt("Enter new list name:");
+      const name = prompt("Enter new tag name:");
       if (name && name.trim()) {
         projectManager.addTag(name.trim());
         this.renderAll();
