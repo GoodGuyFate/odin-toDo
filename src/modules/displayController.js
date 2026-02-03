@@ -26,7 +26,18 @@ export const displayController = {
         filterTag === "All" ? "Sticky Wall" : `Sticky Wall - ${filterTag}`;
     }
 
-    const projectsToShow = projectManager.getProjectsByTag(filterTag);
+    // OCP Fix: Define the filtering logic as a function here
+    const filterCriteria = (project) => {
+      if (filterTag === "All") return true;
+      return project.todos[0]?.tag === filterTag;
+    };
+
+    // Use the new generic filter method in the manager
+    const projectsToShow = projectManager.filterProjects((p) => {
+      if (filterTag === "All") return true;
+      return p.todos.some(todo => todo.tag === filterTag);
+    });
+
     projectsToShow.sort((a, b) => a.name.localeCompare(b.name));
 
     projectsToShow.forEach((project) => {

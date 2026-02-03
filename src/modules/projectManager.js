@@ -1,4 +1,3 @@
-import { Project } from "./project.js";
 import { ProjectService } from "./projectService.js";
 
 /**
@@ -80,9 +79,8 @@ class ProjectManager {
   }
 
   // Filters projects based on their primary todo's tag
-  getProjectsByTag(tagName) {
-    if (tagName === "All") return this.projects;
-    return this.projects.filter((p) => p.todos[0]?.tag === tagName);
+  filterProjects(predicate) {
+    return this.projects.filter(predicate);
   }
 
   addTodoToCurrent(todo) {
@@ -102,7 +100,6 @@ class ProjectManager {
     if (this.currentProject?.uuid === id) {
       this.currentProject = this.projects[0] || null;
     }
-
   }
 
   getProjectById(id) {
