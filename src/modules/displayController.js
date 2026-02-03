@@ -108,7 +108,7 @@ export const displayController = {
     return card;
   },
 
-  // Populates the sidebar with system and user-defined project tags
+  // Populates the sidebar with system and user defined project tags
   renderSidebar() {
     const sidebar = document.querySelector(".projects-section");
     if (!sidebar) return;
@@ -216,7 +216,7 @@ export const displayController = {
       const checklistRaw = document.getElementById("first-todo").value;
       const selectedTag = document.getElementById("todo-tag").value;
 
-      // Converts comma-separated string into structured checklist objects
+      // Converts comma separated string into structured checklist objects
       const checklistItems = checklistRaw
         .split(",")
         .filter((i) => i.trim())

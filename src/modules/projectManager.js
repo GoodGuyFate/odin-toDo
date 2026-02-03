@@ -9,7 +9,7 @@ class ProjectManager {
     this.projects = [];
     this.currentProject = null;
     this.tags = [{ name: "Personal", color: "#fff9c4" }];
-    // Hand-picked colors to ensure a cohesive "Sticky Note" aesthetic
+    // Hand picked colors to ensure a cohesive "Sticky Note" aesthetic
     this.pastelPalette = [
       "#f3d1b0",
       "#d0f4de",
@@ -47,7 +47,7 @@ class ProjectManager {
     return newColor;
   }
 
-  // Registers a new list category and assigns a unique pastel color
+  // Registers a new tag category and assigns a unique pastel color
   addTag(name) {
     const sanitizedName = name.trim();
     if (
