@@ -11,5 +11,8 @@ export const ProjectService = {
         if (todo.checklist[index]) {
             todo.checklist[index].completed = !todo.checklist[index].completed
         }
+    },
+    removeProjectFromList(projectsArray, projectId) {
+        return projectsArray.filter(p => p.uuid !== projectId);
     }
 }

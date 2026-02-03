@@ -1,13 +1,16 @@
 import { Project } from "./project.js";
 import { ProjectService } from "./projectService.js";
 
+/**
+ * Orchestrates the application state, managing projects, tags,
+ * and color palettes for the UI.
+ */
 class ProjectManager {
   constructor() {
     this.projects = [];
     this.currentProject = null;
-    this.tags = [
-      { name: "Personal", color: "#fff9c4" }, // Pastel Yellow
-    ];
+    this.tags = [{ name: "Personal", color: "#fff9c4" }];
+    // Hand-picked colors to ensure a cohesive "Sticky Note" aesthetic
     this.pastelPalette = [
       "#f3d1b0",
       "#d0f4de",
@@ -22,20 +25,21 @@ class ProjectManager {
     return this.tags;
   }
 
+  /**
+   * Selects a color from the predefined palette, falling back
+   * to a randomized HSL pastel if the palette is exhausted.
+   */
   getNextAvailableColor() {
     const usedColors = this.tags.map((t) => t.color);
 
-    // 1. Try to pick from the high-quality hand-picked palette first
     const availableFromPalette = this.pastelPalette.find(
       (c) => !usedColors.includes(c),
     );
     if (availableFromPalette) return availableFromPalette;
 
-    // 2. If palette is exhausted, generate a unique random pastel (HSL)
     let newColor;
     let attempts = 0;
     do {
-      // Pastels live in high lightness (90%) and moderate saturation (70%)
       const hue = Math.floor(Math.random() * 360);
       newColor = `hsl(${hue}, 70%, 90%)`;
       attempts++;
@@ -44,6 +48,7 @@ class ProjectManager {
     return newColor;
   }
 
+  // Registers a new list category and assigns a unique pastel color
   addTag(name) {
     const sanitizedName = name.trim();
     if (
@@ -56,6 +61,7 @@ class ProjectManager {
     }
   }
 
+  // Removes a tag and resets any orphaned notes to the "Personal" category
   deleteTag(tagName) {
     if (tagName === "Personal" || tagName === "All") return;
 
@@ -73,6 +79,7 @@ class ProjectManager {
     return tag ? tag.color : "#fff9c4";
   }
 
+  // Filters projects based on their primary todo's tag
   getProjectsByTag(tagName) {
     if (tagName === "All") return this.projects;
     return this.projects.filter((p) => p.todos[0]?.tag === tagName);
@@ -84,6 +91,7 @@ class ProjectManager {
     }
   }
 
+  // Ensures the app is never empty by creating a default project on load
   setupDefaultProject() {
     if (this.projects.length === 0) {
       const home = new Project("Home");
@@ -96,8 +104,9 @@ class ProjectManager {
     this.projects.push(project);
   }
 
+  // Delegates project array manipulation to the Service Layer and handles focus transitions
   deleteProject(id) {
-    this.projects = this.projects.filter((p) => p.uuid !== id);
+    this.projects = ProjectService.removeProjectFromList(this.projects, id);
 
     if (this.currentProject?.uuid === id) {
       this.currentProject = this.projects[0] || null;
