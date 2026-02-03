@@ -79,8 +79,8 @@ class ProjectManager {
   }
 
   // Filters projects based on their primary todo's tag
-  filterProjects(predicate) {
-    return this.projects.filter(predicate);
+  filterProjects(criteria) {
+    return this.projects.filter(criteria);
   }
 
   addTodoToCurrent(todo) {
