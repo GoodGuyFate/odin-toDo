@@ -1,4 +1,6 @@
+import { Project } from "./project.js";
 import { ProjectService } from "./projectService.js";
+import { ToDoObject } from "./todo.js";
 
 /**
  * Orchestrates the application state, managing projects, tags,
@@ -18,6 +20,48 @@ class ProjectManager {
       "#cfbaf0",
       "#b9fbc0",
     ];
+    this.loadFromLocalStorage();
+  }
+
+  saveToLocalStorage() {
+    const projectsJSON = JSON.stringify(this.projects);
+
+    const tagsJSON = JSON.stringify(this.tags);
+
+    localStorage.setItem("todoProjects", projectsJSON);
+    localStorage.setItem("todoTags", tagsJSON);
+  }
+
+  loadFromLocalStorage() {
+    const data = localStorage.getItem("todoProjects");
+    const tags = localStorage.getItem("todoTags");
+    if (!data) return;
+
+    const parsedProjects = JSON.parse(data);
+    const parsedTags = JSON.parse(tags);
+
+    this.projects = [];
+    if (parsedTags) this.tags = parsedTags;
+
+    parsedProjects.forEach((projectData) => {
+      const project = new Project(projectData.name);
+
+      projectData.todos.forEach((toDoData) => {
+        const toDo = new ToDoObject(
+          toDoData.title,
+          toDoData.description,
+          toDoData.dueDate,
+          toDoData.priority,
+          {
+            checklist: toDoData.checklist,
+            tag: toDoData.tag,
+            uuid: toDoData.uuid,
+          },
+        );
+        project.addTodo(toDo);
+      });
+      this.projects.push(project);
+    });
   }
 
   getAllTags() {
@@ -58,6 +102,7 @@ class ProjectManager {
       const color = this.getNextAvailableColor();
       this.tags.push({ name: sanitizedName, color });
     }
+    this.saveToLocalStorage();
   }
 
   // Removes a tag and resets any orphaned notes to the "Personal" category
@@ -71,6 +116,7 @@ class ProjectManager {
         p.todos[0].tag = "Personal";
       }
     });
+    this.saveToLocalStorage();
   }
 
   getTagColor(tagName) {
@@ -91,6 +137,7 @@ class ProjectManager {
 
   addProject(project) {
     this.projects.push(project);
+    this.saveToLocalStorage();
   }
 
   // Delegates project array manipulation to the Service Layer and handles focus transitions
@@ -100,6 +147,7 @@ class ProjectManager {
     if (this.currentProject?.uuid === id) {
       this.currentProject = this.projects[0] || null;
     }
+    this.saveToLocalStorage();
   }
 
   getProjectById(id) {

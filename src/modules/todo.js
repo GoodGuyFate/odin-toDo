@@ -10,6 +10,6 @@ export class ToDoObject {
         this.tags = options.tags || []
         this.tag = options.tag || "Personal";
 
-        this.uuid = crypto.randomUUID()
+        this.uuid = options.uuid || crypto.randomUUID()
     }
 }

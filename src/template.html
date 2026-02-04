@@ -17,7 +17,14 @@
       </aside>
 
       <main class="sticky-wall">
-        <h1 id="current-project-title">Sticky Wall</h1>
+        <div class="sticky-wall-header">
+          <h1 id="current-project-title">Sticky Wall</h1>
+          <input
+            type="text"
+            id="project-search"
+            placeholder="Search notes..."
+          />
+        </div>
         <div class="grid-container">
           <div id="todo-grid"></div>
         </div>
@@ -48,6 +55,21 @@
             placeholder="Checklist (item 1, item 2...)"
             maxlength="150"
           />
+          <div class="form-row">
+            <div class="input-group">
+              <label for="todo-date">Due Date</label>
+              <input type="date" id="todo-date" />
+            </div>
+
+            <div class="input-group">
+              <label for="todo-priority">Priority</label>
+              <select id="todo-priority">
+                <option value="low">Low 🔵</option>
+                <option value="medium" selected>Medium 🟡</option>
+                <option value="high">High 🔴</option>
+              </select>
+            </div>
+          </div>
 
           <div class="modal-actions">
             <button type="button" id="close-modal">Cancel</button>

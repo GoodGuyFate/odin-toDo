@@ -305,3 +305,114 @@ button[type="submit"] {
 .hidden {
   display: none;
 }
+
+.priority-stripe {
+  height: 8px;
+  width: 60px;
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  opacity: 0.8;
+}
+.priority-stripe.high {
+  background-color: #ff6b6b;
+  box-shadow: 0 2px 4px rgba(255, 107, 107, 0.3);
+}
+.priority-stripe.medium {
+  background-color: #ffd93d;
+}
+.priority-stripe.low {
+  background-color: #6bc1ff;
+}
+.card-footer {
+  margin-top: auto;
+  text-align: right;
+  font-size: 0.75rem;
+  font-style: italic;
+  opacity: 0.6;
+}
+.todo-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 180px;
+}
+.projects-section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.tags-scroll-container {
+  max-height: 280px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-bottom: 10px;
+  padding-right: 8px;
+}
+.tags-scroll-container::-webkit-scrollbar {
+  width: 5px;
+}
+.tags-scroll-container::-webkit-scrollbar-thumb {
+  background: #e0e0e0;
+  border-radius: 10px;
+}
+.tag-search-bar {
+  width: 90%;
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  font-size: 0.85rem;
+  outline: none;
+}
+.tag-search-bar:focus {
+  border-color: #d0f4de;
+  background-color: #fff;
+}
+
+.sticky-wall-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  margin-bottom: 2rem;
+  gap: 20px;
+}
+#project-search {
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  width: 300px;
+  outline: none;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background-color: #fcfcfc;
+}
+#project-search:focus {
+  width: 350px; 
+  border-color: #a9def9;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.card-edit-btn {
+  position: absolute;
+  top: 35px;
+  right: 12px; 
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #444;
+  opacity: 0;
+  transition: all 0.2s ease;
+}
+.todo-card:hover .card-edit-btn{
+  opacity: 0.5;
+}
+
+.card-edit-btn:hover {
+  opacity: 1 !important;
+  transform: scale(1.1);
+}
